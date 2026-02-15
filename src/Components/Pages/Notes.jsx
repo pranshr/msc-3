@@ -87,10 +87,10 @@ export default function NotesPage() {
   }, [selectedNote, content, category, title]);
 
   return (
-    <div className="h-full flex bg-gray-100">
+    <div className="bg-slate-50 min-h-full p-6 flex">
       {/* LEFT SIDE - Notes List */}
       <div className="w-3/10 p-10 overflow-y-auto">
-        <h1 className="text-3xl font-bold mb-6">My Notes</h1>
+        <h1 className="text-3xl font-bold mb-6 text-black">My Notes</h1>
         <div className="space-y-4">
           {notes.map((note) => (
             <div
@@ -101,7 +101,7 @@ export default function NotesPage() {
                 className="flex-1 cursor-pointer w-full"
                 onClick={() => handleSelectNote(note)}
               >
-                <h2 className="font-semibold text-lg">{note.title}</h2>
+                <h2 className="font-semibold text-lg text-black">{note.title}</h2>
                 <p className="text-gray-500 truncate max-w-40 overflow-hidden">{note.content}</p>
                 <span className="text-sm text-blue-600">{note.category}</span>
               </div>
@@ -121,12 +121,12 @@ export default function NotesPage() {
       </div>
 
       {/* RIGHT SIDE - Note Editor */}
-      <div className="w-7/10 flex flex-col justify-start bg-white">
-        <div className="w-full max-w-4xl mx-auto">
-          {/* Title, Category, Save/Update on same line */}
-          <div className="flex items-center space-x-4 p-5 pb-4 bg-neutral-200 relative">
+      <div className="w-7/10 flex flex-col justify-start bg-white dark:bg-slate-50 border-l border-gray-200 dark:border-slate-800">
+        {/* Header - Full Width Background */}
+        <div className="w-full bg-slate-200 dark:bg-slate-200 border-b border-gray-300 dark:border-slate-800">
+          <div className="max-w-4xl mx-auto flex items-center space-x-4 p-5 pb-4 relative">
             {/* Editable title */}
-            <div>
+            <div className="text-black">
               <i className="fa-solid fa-pen-to-square"></i>
             </div>
             <div
@@ -134,7 +134,7 @@ export default function NotesPage() {
               contentEditable
               suppressContentEditableWarning
               dir="ltr"
-              className="text-xl font-semibold focus:outline-none px-2 py-1 min-w-[200px] flex-1 hover:cursor-text text-left"
+              className="text-xl font-semibold focus:outline-none px-2 py-1 min-w-[200px] flex-1 hover:cursor-text text-left text-black"
               onBlur={() => setTitle(titleRef.current?.textContent || "Untitled Note")}
             >
               {title}
@@ -181,16 +181,16 @@ export default function NotesPage() {
               </span>
             )}
           </div>
+        </div>
 
-          {/* Content area */}
-          <div className="p-5">
-            <textarea
-              className="w-full h-[calc(100vh-200px)] p-4 border rounded-md focus:outline-none focus:ring-2 border-emerald-300 focus:ring-indigo-500"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              placeholder="Write your note here..."
-            />
-          </div>
+        {/* Content area - Centered and Flexible */}
+        <div className="w-full max-w-4xl mx-auto p-5 flex-1 flex flex-col">
+          <textarea
+            className="w-full flex-1 p-4 border rounded-md focus:outline-none focus:ring-2 border-emerald-300 focus:ring-indigo-500 resize-none bg-white dark:bg-slate-100 text-black"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            placeholder="Write your note here..."
+          />
         </div>
       </div>
     </div>

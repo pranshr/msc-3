@@ -54,7 +54,7 @@ const Home = ({ userName = "Alex" }) => {
   };
 
   return (
-    <div className="h-full bg-slate-50 px-6 py-8">
+    <div className="min-h-full bg-slate-50 px-6 py-8">
       <div className="max-w-6xl mx-auto space-y-10">
         {/* Welcome */}
         <div>

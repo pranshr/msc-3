@@ -34,11 +34,11 @@ export default function UrlShortenerPage() {
   };
 
   return (
-    <div className="h-full flex bg-neutral-300">
+    <div className="min-h-full flex bg-slate-50">
       {/* LEFT SIDE - URL SHORTENER */}
       <div className="w-4/10 m-4 p-10 flex flex-col justify-center bg-white rounded-md">
         <div className="w-full max-w-[75%] mx-auto">
-          <h1 className="text-3xl font-bold mb-6">URL Shortener</h1>
+          <h1 className="text-3xl font-bold mb-6 text-black">URL Shortener</h1>
 
           <InputField
             id="url"
@@ -54,7 +54,7 @@ export default function UrlShortenerPage() {
 
           {links.length > 0 && (
             <div className="mt-8">
-              <h2 className="text-xl font-semibold mb-3">
+              <h2 className="text-xl font-semibold mb-3 text-black">
                 Recently Generated
               </h2>
 
@@ -86,7 +86,7 @@ export default function UrlShortenerPage() {
 
       {/* RIGHT SIDE - CLICK TRACKING */}
       <div className="w-6/10 p-10 overflow-y-auto">
-        <h1 className="text-3xl font-bold mb-6">Click Analytics</h1>
+        <h1 className="text-3xl font-bold mb-6 text-black">Click Analytics</h1>
 
         {links.length === 0 ? (
           <p className="text-gray-500">
@@ -99,10 +99,10 @@ export default function UrlShortenerPage() {
                 key={link.id}
                 className="bg-white p-5 rounded-lg shadow-sm"
               >
-                <p className="text-sm text-gray-500 mb-1">
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">
                   Original URL
                 </p>
-                <p className="truncate mb-3">{link.originalUrl}</p>
+                <p className="truncate mb-3 text-black font-medium">{link.originalUrl}</p>
 
                 <div className="flex items-center justify-between">
                   <Button

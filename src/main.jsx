@@ -17,6 +17,7 @@ import NotFound from "./Components/Pages/NotFound";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Manage login state here
   const [username, setUsername] = useState("Guest"); // Default to "Guest"
+  const [darkMode, setDarkMode] = useState(false); // Dark mode state
 
   // Log out handler
   const handleLogout = () => {
@@ -38,7 +39,15 @@ function App() {
 
         {/* Wrap all routes except /login with Navbar */}
         <Route
-          element={<Navbar isLoggedIn={isLoggedIn} username={username} setIsLoggedIn={handleLogout} />}
+          element={
+            <Navbar
+              isLoggedIn={isLoggedIn}
+              username={username}
+              setIsLoggedIn={handleLogout}
+              darkMode={darkMode}
+              setDarkMode={setDarkMode}
+            />
+          }
         >
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />} />

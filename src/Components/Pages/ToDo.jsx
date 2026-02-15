@@ -102,16 +102,15 @@ const ToDo = () => {
     };
 
     return (
-        <div className="flex py-10 justify-center relative">
+        <div className="min-h-full bg-slate-50 flex py-10 justify-center relative">
             <div
-                className={`w-full max-w-lg flex flex-col gap-4 transition-all duration-300 ${
-                    showAddCard ? "mr-[50%]" : ""
-                }`}
+                className={`w-full max-w-lg flex flex-col gap-4 transition-all duration-300 ${showAddCard ? "mr-[50%]" : ""
+                    }`}
             >
                 <div>
                     <InputField
-                        label="Search todos..."
                         type="search"
+                        placeholder="Search todos..."
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                         required={false}
@@ -160,17 +159,16 @@ const ToDo = () => {
                         return (
                             <div
                                 key={todo.id}
-                                className={`bg-white rounded-lg shadow p-4 ${
-                                    todo.urgent
-                                        ? "border-l-4 border-red-500"
-                                        : ""
-                                }`}
+                                className={`bg-white rounded-lg shadow p-4 ${todo.urgent
+                                    ? "border-l-4 border-red-500"
+                                    : ""
+                                    }`}
                             >
                                 <div className="flex justify-between items-center mb-2">
-                                    <h3 className="font-semibold text-gray-800">
+                                    <h3 className="font-semibold text-black">
                                         {todo.title}
                                     </h3>
-                                    <span className="text-sm text-gray-500">
+                                    <span className="text-sm text-gray-500 dark:text-gray-400">
                                         {todo.date}
                                     </span>
                                 </div>
@@ -188,7 +186,7 @@ const ToDo = () => {
                                     )}
                                 </div>
 
-                                <p className="text-gray-600 text-sm">
+                                <p className="text-gray-600 dark:text-gray-400 text-sm">
                                     {todo.description}
                                 </p>
 
@@ -220,7 +218,7 @@ const ToDo = () => {
             {showAddCard && (
                 <div className="fixed top-10 right-18 bottom-20 bg-slate-100 shadow-lg rounded-xl p-6 w-[40%] z-50 flex flex-col justify-between items-center border-2 border-neutral-400">
                     <div className="w-90">
-                        <h2 className="font-bold text-emerald-900 text-3xl mb-6 mt-3">
+                        <h2 className="font-bold text-emerald-900 dark:text-emerald-400 text-3xl mb-6 mt-3">
                             {editingTodoId ? "Edit Todo" : "Add Todo"}
                         </h2>
 
@@ -272,7 +270,7 @@ const ToDo = () => {
                                 }
                                 className="mr-2"
                             />
-                            <label className="text-gray-700">
+                            <label className="text-black">
                                 Urgent
                             </label>
                         </div>

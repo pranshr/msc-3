@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import SearchBar from "../UI/SearchBar";
+import Button from "../UI/Button";
+import DropdownMenu from "../UI/DropdownMenu";
+import InputField from "../UI/InputField";
 
 const units = {
   Length: ["meters", "kilometers", "miles", "feet"],
@@ -140,7 +143,7 @@ export default function UnitConverter() {
   const toOptions = units[unitType].map((u) => ({ label: u, value: u }));
 
   return (
-    <div className="bg-gray-100 text-gray-900 h-full p-6">
+    <div className="bg-slate-50 min-h-full p-6">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-6 h-[80vh]">
 
         {/* LEFT: Converter */}
@@ -148,40 +151,36 @@ export default function UnitConverter() {
 
           {/* Unit Type */}
           <div className="mb-6">
-            <label className="block font-semibold mb-1">Unit Type</label>
-            <select
-              className="w-full border p-2 rounded"
-              value={unitType}
-              onChange={(e) => {
-                const type = e.target.value;
+            <label className="block font-semibold mb-1 text-black">Unit Type</label>
+            <DropdownMenu
+              options={Object.keys(units).map((type) => ({ label: type, value: type }))}
+              currentValue={unitType}
+              onChange={(type) => {
                 setUnitType(type);
                 setFromUnit(units[type][0]);
                 setToUnit(units[type][1]);
                 setValue("");
                 setResult("");
               }}
-            >
-              {Object.keys(units).map((type) => (
-                <option key={type}>{type}</option>
-              ))}
-            </select>
+              bgColor="bg-white text-gray-900"
+              buttonClassName="border"
+              textSize="text-base"
+              buttonHeight="h-10"
+            />
           </div>
 
           {/* Input / Output Blocks */}
           <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
 
             {/* Input Block */}
-            <div className="border rounded p-4 bg-gray-50">
-              <label className="block font-semibold mb-2">Input</label>
-
-              <input
+            <div className="border border-slate-200 dark:border-slate-800 rounded p-4 bg-white dark:bg-white shadow-sm">
+              <InputField
                 type="number"
-                className="w-full border border-gray-400 p-3 mb-3
-                           rounded-none text-xl font-semibold
-                           focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Enter value"
+                className="text-3xl text-center font-semibold"
+                placeholder="0"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
+                marginBottom={1}
               />
 
               <SearchBar
@@ -193,16 +192,13 @@ export default function UnitConverter() {
             </div>
 
             {/* Output Block */}
-            <div className="border rounded p-4 bg-gray-50">
-              <label className="block font-semibold mb-2">Output</label>
-
-              <input
+            <div className="border border-slate-200 dark:border-slate-800 rounded p-4 bg-white dark:bg-white shadow-sm">
+              <InputField
                 type="text"
-                className="w-full border border-gray-300 p-3 mb-3
-                           rounded-none text-xl font-semibold
-                           bg-gray-200"
+                className="text-3xl text-center font-bold"
                 readOnly
                 value={result}
+                marginBottom={1}
               />
 
               <SearchBar
@@ -217,8 +213,10 @@ export default function UnitConverter() {
 
           {/* Swap */}
           <div className="flex justify-center mb-4">
-            <button
-              className="p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            <Button
+              variant="secondary"
+              size="small"
+              stretch={false}
               onClick={() => {
                 setFromUnit(toUnit);
                 setToUnit(fromUnit);
@@ -227,30 +225,31 @@ export default function UnitConverter() {
               }}
             >
               ⬌ Swap
-            </button>
+            </Button>
           </div>
 
           {/* Actions */}
-          <button
-            className="px-4 py-2 bg-purple-500 text-white rounded"
+          <Button
+            variant="primary"
+            style="box"
             onClick={saveConversion}
             disabled={!result}
           >
             Save Conversion
-          </button>
+          </Button>
         </div>
 
         {/* RIGHT: History + Frequent */}
         <div className="flex-1 flex flex-col gap-6 h-full">
 
           {/* History */}
-          <div className="bg-white p-6 rounded shadow flex-1 overflow-auto">
-            <h2 className="text-2xl font-bold mb-2">Recent Conversions</h2>
+          <div className="bg-white border border-slate-200 dark:border-slate-800 p-6 rounded shadow flex-1 overflow-auto">
+            <h2 className="text-2xl font-bold mb-2 text-black">Recent Conversions</h2>
             <ul className="space-y-2">
               {history.map((item) => (
                 <li
                   key={item.id}
-                  className="p-2 bg-gray-100 rounded"
+                  className="p-2 bg-gray-100 dark:bg-slate-800 rounded text-black font-medium"
                 >
                   {item.value} {item.from} → {item.result} {item.to}
                 </li>
@@ -259,8 +258,8 @@ export default function UnitConverter() {
           </div>
 
           {/* Frequent */}
-          <div className="bg-white p-6 rounded shadow flex-1 overflow-auto">
-            <h2 className="text-2xl font-bold mb-2">Frequent Conversions</h2>
+          <div className="bg-white border border-slate-200 dark:border-slate-800 p-6 rounded shadow flex-1 overflow-auto">
+            <h2 className="text-2xl font-bold mb-2 text-black">Frequent Conversions</h2>
             <ul className="space-y-2">
               {Object.entries(frequency).map(([key, count]) => (
                 <li
